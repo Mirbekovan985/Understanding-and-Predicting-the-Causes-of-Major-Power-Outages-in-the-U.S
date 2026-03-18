@@ -137,18 +137,18 @@ This resulted in a clean dataset called `analysis_df`.
 I analyzed the distributions of:
 
 <iframe
-  src="assets//Users/outages_by_cause.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+    src="assets/outages_by_cause.html"
+    width="800"
+    height="600"
+    frameborder="0">
+</iframe>
 
 <iframe
-  src="assets//Users/outage_duration_dist.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
+    src="assets/outage_duration_dist.html"
+    width="800"
+    height="600"
+    frameborder="0">
+</iframe>
 
 These showed that outage duration and size are highly skewed.
 
@@ -159,14 +159,14 @@ These showed that outage duration and size are highly skewed.
 I explored relationships between:
 
 <iframe
-  src="assets//Users/customers_vs_duration.html"
+  src="assets/customers_vs_duration.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
 <iframe
-  src="assets//Users/duration_by_cause.html"
+  src="assets/duration_by_cause.html"
   width="800"
   height="600"
   frameborder="0"
