@@ -80,35 +80,12 @@ I focused on the following columns:
 `TOTAL.PRICE`, `TOTAL.SALES`, `TOTAL.CUSTOMERS`,  
 `POPPCT_URBAN`, `POPDEN_URBAN`, `AREAPCT_URBAN`
 
----
-
-OUTAGE.START  OUTAGE.RESTORATION  OUTAGE.DURATION_MIN  \
-0 2011-07-01 17:00:00 2011-07-03 20:00:00               3060.0   
-1 2014-05-11 18:38:00 2014-05-11 18:39:00                  1.0   
-2 2010-10-26 20:00:00 2010-10-28 22:00:00               3000.0   
-3 2012-06-19 04:30:00 2012-06-20 23:00:00               2550.0   
-4 2015-07-18 02:00:00 2015-07-19 07:00:00               1740.0   
-
-   CUSTOMERS.AFFECTED  TOTAL.CUSTOMERS U.S._STATE  POPPCT_URBAN  \
-0             70000.0        2595696.0  Minnesota         73.27   
-1                 NaN        2640737.0  Minnesota         73.27   
-2             70000.0        2586905.0  Minnesota         73.27   
-3             68200.0        2606813.0  Minnesota         73.27   
-4            250000.0        2673531.0  Minnesota         73.27   
-
-   ANOMALY.LEVEL      CLIMATE.REGION      CAUSE.CATEGORY  \
-0           -0.3  East North Central      severe weather   
-1           -0.1  East North Central  intentional attack   
-2           -1.5  East North Central      severe weather   
-3           -0.1  East North Central      severe weather   
-4            1.2  East North Central      severe weather   
-
-  CAUSE.CATEGORY.DETAIL    YEAR  MONTH  
-0                   NaN  2011.0    7.0  
-1             vandalism  2014.0    5.0  
-2            heavy wind  2010.0   10.0  
-3          thunderstorm  2012.0    6.0  
-4                   NaN  2015.0    7.0
+<iframe
+    src="assets/preview_table.html"
+    width="100%"
+    height="400"
+    frameborder="0">
+</iframe>
 
 ## Data Cleaning  
 
@@ -188,28 +165,11 @@ I grouped the data to identify patterns:
   - `CLIMATE.REGION`  
   - `CAUSE.CATEGORY`  
 
-CAUSE.CATEGORY      equipment failure  fuel supply emergency  \
-CLIMATE.REGION                                                 
-Central                           1.3                    0.6   
-East North Central                0.0                    0.0   
-Northeast                         1.5                    0.8   
-Northwest                         3.2                    0.0   
-South                             3.9                    0.0   
-
-CAUSE.CATEGORY      intentional attack  islanding  public appeal  \
-CLIMATE.REGION                                                     
-Central                           13.4        1.9            0.0   
-East North Central                 7.6        0.8            0.8   
-Northeast                         30.5        0.4            1.1   
-Northwest                         43.5        1.6            3.2   
-South                              7.7        0.6            7.1   
-
-CAUSE.CATEGORY      severe weather  system operability disruption  
-CLIMATE.REGION                                                     
-Central                       79.0                            3.8  
-East North Central            88.1                            2.5  
-Northeast                     63.2                            2.6  
-Northwest                     46.8                            1.6  
-South                         67.1                           13.5
+<iframe
+    src="assets/pivot_table.html"
+    width="100%"
+    height="400"
+    frameborder="0">
+</iframe>
 
 This helped identify which regions and causes are associated with more severe outages.
