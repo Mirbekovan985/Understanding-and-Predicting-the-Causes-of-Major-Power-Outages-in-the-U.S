@@ -129,6 +129,7 @@ I analyzed the distributions of:
 
 These showed that outage duration and size are highly skewed.
 
+
 ---
 
 ### Bivariate Analysis  
