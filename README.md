@@ -318,3 +318,83 @@ A permutation test was an appropriate choice because:
 - It directly tests the relationship of interest by comparing group labels  
 
 Using the difference in means as the test statistic allows for an intuitive and interpretable comparison between the two groups.
+
+## Framing a Prediction Problem
+
+### Prediction Problem
+
+The goal of this model is to **predict the duration of a power outage** based on information available at the time the outage occurs.
+
+This is a **regression problem**, since the response variable is continuous.
+
+---
+
+### Response Variable
+
+The response variable is:
+
+- `OUTAGE.DURATION`
+
+This variable was chosen because outage duration is a key measure of outage severity and impact. Predicting it can help utilities better prepare responses and allocate resources more effectively.
+
+---
+
+### Features Used
+
+The features used for prediction are:
+
+- `CAUSE.CATEGORY`  
+- `MONTH`  
+- `U.S._STATE`  
+
+These features were selected because they are **known at the time of prediction**, meaning:
+- The cause category is identified when the outage begins  
+- The month is known  
+- The location (state) is known  
+
+No information that would only be available after the outage ends was used, ensuring the model reflects a realistic prediction setting.
+
+---
+
+### Model and Preprocessing
+
+To build the model:
+
+- Categorical variables (`CAUSE.CATEGORY`, `U.S._STATE`) were **one-hot encoded**  
+- The numeric variable (`MONTH`) was used directly  
+
+A **Random Forest Regressor** was used within a pipeline to combine preprocessing and modeling.
+
+This model was chosen because:
+- It can capture **nonlinear relationships**
+- It handles categorical features well after encoding
+- It is robust to outliers and does not require strong distributional assumptions  
+
+---
+
+### Evaluation Metrics
+
+The model was evaluated using:
+
+- **Root Mean Squared Error (RMSE)**  
+- **R² (coefficient of determination)**  
+
+Results:
+- RMSE: 7110.74  
+- R²: 0.176  
+
+---
+
+### Justification of Metrics
+
+- **RMSE** was chosen because it measures the average prediction error in the same units as the response variable (minutes), making it interpretable. It also penalizes large errors more heavily, which is important for outage duration.
+
+- **R²** was used to measure how much of the variability in outage duration is explained by the model.
+
+---
+
+### Interpretation
+
+The relatively high RMSE and low R² suggest that outage duration is difficult to predict using only the selected features. This indicates that other factors — such as infrastructure conditions, response time, or weather severity — likely play a significant role in determining outage duration.
+
+Despite this, the model provides a baseline for understanding how available features relate to outage duration and can be improved with additional data.
