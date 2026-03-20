@@ -166,11 +166,16 @@ I grouped the data to identify patterns:
   - `CLIMATE.REGION`  
   - `CAUSE.CATEGORY`  
 
-<iframe
-    src="assets/pivot_table.html"
-    width="100%"
-    height="400"
-    frameborder="0">
-</iframe>
+| CLIMATE.REGION     |   equipment failure |   fuel supply emergency |   intentional attack |   islanding |   public appeal |   severe weather |   system operability disruption |
+|:-------------------|--------------------:|------------------------:|---------------------:|------------:|----------------:|-----------------:|--------------------------------:|
+| Central            |                   2 |                       1 |                   21 |           3 |               0 |              124 |                               6 |
+| East North Central |                   0 |                       0 |                    9 |           1 |               1 |              104 |                               3 |
+| Northeast          |                   4 |                       2 |                   81 |           1 |               3 |              168 |                               7 |
+| Northwest          |                   2 |                       0 |                   27 |           1 |               2 |               29 |                               1 |
+| South              |                   6 |                       0 |                   12 |           1 |              11 |              104 |                              21 |
+| Southeast          |                   5 |                       0 |                    4 |           0 |               3 |              116 |                              15 |
+| Southwest          |                   3 |                       1 |                   26 |           1 |               0 |                7 |                               7 |
+| West               |                   7 |                       3 |                   17 |          26 |               0 |               57 |                              22 |
+| West North Central |                   0 |                       0 |                    2 |           0 |               1 |                4 |                               0 |
 
 This helped identify which regions and causes are associated with more severe outages.
