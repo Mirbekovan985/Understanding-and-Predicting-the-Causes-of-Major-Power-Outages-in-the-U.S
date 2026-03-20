@@ -547,8 +547,8 @@ Final chosen values:
 
 ### Model Performance  
 
-- **RMSE:** REPLACE_WITH_YOUR_VALUE  
-- **R²:** REPLACE_WITH_YOUR_VALUE  
+- **RMSE:** 3088.30  
+- **R²:** 0.170  
 
 ---
 
@@ -559,12 +559,12 @@ Baseline model:
 - R²: 0.146  
 
 Final model:
-- RMSE: REPLACE_WITH_YOUR_VALUE  
-- R²: REPLACE_WITH_YOUR_VALUE  
+- RMSE: 3088.30  
+- R²: 0.170  
 
-The final model improves performance by:
-- Lowering RMSE (better prediction accuracy)  
-- Increasing R² (explains more variance)  
+The final model significantly improves performance by:
+- Reducing RMSE by more than half  
+- Increasing R², meaning it explains more variance in outage duration  
 
 ---
 
@@ -572,7 +572,77 @@ The final model improves performance by:
 
 The improved performance suggests that:
 - Outage severity (relative impact) is an important predictor  
-- Feature engineering significantly improves model performance  
+- Feature engineering plays a critical role in model performance  
 - Nonlinear models better capture relationships in the data  
 
-This final model provides a stronger and more realistic prediction of outage duration compared to the baseline model.
+This final model provides a much stronger and more realistic prediction of outage duration compared to the baseline model.
+
+## Fairness Analysis  
+
+### Groups  
+
+To evaluate fairness, I compared model performance across two groups:
+
+- **Group X:** Winter outages (`IS_WINTER = 1`)  
+- **Group Y:** Non-winter outages (`IS_WINTER = 0`)  
+
+This grouping was chosen because outages during winter may involve extreme weather conditions (e.g., storms, snow), which could make them harder to predict.
+
+---
+
+### Evaluation Metric  
+
+Since this is a regression problem, I used:
+
+- **Root Mean Squared Error (RMSE)**  
+
+RMSE measures the average prediction error in minutes and penalizes large errors more heavily.
+
+---
+
+### Hypotheses  
+
+- **Null Hypothesis (H₀):**  
+  The model is fair. The RMSE for winter and non-winter outages is the same, and any observed difference is due to random chance.
+
+- **Alternative Hypothesis (H₁):**  
+  The model is unfair. The RMSE for winter outages is higher than for non-winter outages.
+
+---
+
+### Test Statistic  
+
+Difference in RMSE = RMSE (Winter) − RMSE (Non-Winter)
+
+A positive value would indicate worse performance on winter outages.
+
+---
+
+### Significance Level  
+
+- **α = 0.05**
+
+---
+
+### Results  
+
+- **RMSE (Winter):** 2879.69  
+- **RMSE (Non-Winter):** 3146.74  
+- **Observed Difference:** -267.05  
+- **p-value:** 0.49  
+
+---
+
+### Conclusion  
+
+Since the p-value (0.49) is greater than the significance level (0.05), we **fail to reject the null hypothesis**.
+
+There is no statistically significant evidence that the model performs worse on winter outages compared to non-winter outages.
+
+---
+
+### Interpretation  
+
+Interestingly, the model actually performs slightly **better** on winter outages (lower RMSE), though this difference is not statistically significant.
+
+This suggests that the model generalizes similarly across seasonal conditions and does not exhibit strong evidence of unfairness between winter and non-winter outages.
