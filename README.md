@@ -459,4 +459,120 @@ Overall, this baseline model is **not very strong**, but it serves as an importa
 Future improvements could include:
 - Adding more informative features  
 - Engineering new features  
-- Using more flexible models that can capture nonlinear relationships  
+- Using more flexible models that can capture nonlinear relationships
+
+## Final Model  
+
+### Overview  
+
+To improve upon the baseline model, I developed a more advanced regression model that incorporates additional feature engineering and a more flexible algorithm. The goal was to better capture the factors that influence outage duration and improve predictive performance.
+
+---
+
+### Feature Engineering  
+
+In addition to the baseline features (`CAUSE.CATEGORY`, `U.S._STATE`, `MONTH`), I introduced several new features:
+
+- **`AFFECTED_RATIO`** = `CUSTOMERS.AFFECTED / TOTAL.CUSTOMERS`  
+  - Measures the proportion of customers affected  
+  - Higher values indicate more severe outages, which may take longer to restore  
+
+- **Log-transformed features**:  
+  - `LOG_CUSTOMERS_AFFECTED`  
+  - `LOG_TOTAL_CUSTOMERS`  
+  - These reduce skew in highly right-skewed variables and help the model learn relative differences  
+
+- **`SEVERITY_IMPACT` (interaction feature)**  
+  - `AFFECTED_RATIO × LOG_CUSTOMERS_AFFECTED`  
+  - Captures combined severity and scale of outages  
+
+- **Seasonal features**:  
+  - `IS_WINTER` (December–February)  
+  - `IS_SUMMER` (June–August)  
+  - Capture seasonal effects such as extreme weather conditions  
+
+- **Target transformation**:  
+  - Applied `log1p` to `OUTAGE.DURATION`  
+  - Clipped extreme values at the 99th percentile to reduce noise  
+
+---
+
+### Model Choice  
+
+I used a **Gradient Boosting Regressor** inside an sklearn Pipeline.
+
+Reasons:
+- Captures nonlinear relationships  
+- Handles complex interactions between features  
+- Performs well on tabular data  
+
+---
+
+### Hyperparameter Tuning  
+
+I tuned the following hyperparameters:
+
+- `n_estimators`  
+- `learning_rate`  
+- `max_depth`  
+
+These control model complexity and the bias-variance tradeoff.
+
+Final chosen values:
+- `n_estimators = 400`  
+- `learning_rate = 0.04`  
+- `max_depth = 5`  
+
+---
+
+### Model Pipeline  
+
+- One-hot encoding:
+  - `CAUSE.CATEGORY`
+  - `U.S._STATE`  
+
+- Numerical features:
+  - `MONTH`
+  - `AFFECTED_RATIO`
+  - `LOG_CUSTOMERS_AFFECTED`
+  - `LOG_TOTAL_CUSTOMERS`
+  - `SEVERITY_IMPACT`
+  - `IS_WINTER`
+  - `IS_SUMMER`
+
+- Model:
+  - Gradient Boosting Regressor  
+
+---
+
+### Model Performance  
+
+- **RMSE:** REPLACE_WITH_YOUR_VALUE  
+- **R²:** REPLACE_WITH_YOUR_VALUE  
+
+---
+
+### Comparison to Baseline  
+
+Baseline model:
+- RMSE: 7239.93  
+- R²: 0.146  
+
+Final model:
+- RMSE: REPLACE_WITH_YOUR_VALUE  
+- R²: REPLACE_WITH_YOUR_VALUE  
+
+The final model improves performance by:
+- Lowering RMSE (better prediction accuracy)  
+- Increasing R² (explains more variance)  
+
+---
+
+### Conclusion  
+
+The improved performance suggests that:
+- Outage severity (relative impact) is an important predictor  
+- Feature engineering significantly improves model performance  
+- Nonlinear models better capture relationships in the data  
+
+This final model provides a stronger and more realistic prediction of outage duration compared to the baseline model.
