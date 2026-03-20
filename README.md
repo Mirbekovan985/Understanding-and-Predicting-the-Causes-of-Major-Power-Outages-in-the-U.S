@@ -248,3 +248,73 @@ In this case, the observed statistic falls well within the permutation distribut
 ### Conclusion
 
 Overall, the missingness of `OUTAGE.DURATION` appears to depend on some observed variables (such as `CAUSE.CATEGORY`) but not others (such as `YEAR`). While there is evidence of MAR behavior, the possibility of MNAR cannot be ruled out, since missingness may also depend on the unobserved duration values themselves.
+
+## Hypothesis Testing
+
+### Research Question
+
+Do power outages caused by severe weather last longer, on average, than outages caused by other factors?
+
+---
+
+### Hypotheses
+
+- **Null Hypothesis (H₀):**  
+  The average outage duration for severe weather outages is equal to the average outage duration for non-severe weather outages.
+
+- **Alternative Hypothesis (H₁):**  
+  The average outage duration for severe weather outages is greater than that for non-severe weather outages.
+
+---
+
+### Test Statistic and Method
+
+To test this hypothesis, I conducted a **permutation test**.
+
+The test statistic used was the **difference in means**:
+
+- Mean outage duration for severe weather outages  
+- minus mean outage duration for non-severe weather outages  
+
+This statistic is appropriate because it directly measures the difference in average outage duration between the two groups, which aligns with the research question.
+
+The significance level was set to **α = 0.05**.
+
+---
+
+### Results
+
+- **Observed difference in means:** 2537.81 minutes  
+- **p-value:** 0.0  
+
+The permutation distribution of the test statistic is shown below:
+
+<iframe
+  src="assets/hypothesis_test.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The observed statistic lies far in the right tail of the permutation distribution, indicating that such a large difference would be extremely unlikely under the null hypothesis.
+
+---
+
+### Conclusion
+
+Since the p-value is less than the significance level (0.05), we **reject the null hypothesis**.
+
+This provides strong evidence that outages caused by severe weather tend to last longer, on average, than outages caused by other factors.
+
+However, this result does not prove that severe weather definitively causes longer outages; rather, it suggests a statistically significant association between outage cause and duration.
+
+---
+
+### Justification
+
+A permutation test was an appropriate choice because:
+- It does not assume a specific distribution of outage durations  
+- It is robust to skewed data, which is common in duration data  
+- It directly tests the relationship of interest by comparing group labels  
+
+Using the difference in means as the test statistic allows for an intuitive and interpretable comparison between the two groups.
