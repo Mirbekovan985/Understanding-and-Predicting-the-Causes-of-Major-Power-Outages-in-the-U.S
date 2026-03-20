@@ -398,3 +398,65 @@ Results:
 The relatively high RMSE and low R² suggest that outage duration is difficult to predict using only the selected features. This indicates that other factors — such as infrastructure conditions, response time, or weather severity — likely play a significant role in determining outage duration.
 
 Despite this, the model provides a baseline for understanding how available features relate to outage duration and can be improved with additional data.
+
+## Baseline Model
+
+### Model Description
+
+To establish a baseline, I trained a **Linear Regression model** to predict outage duration using a subset of available features.
+
+The model was implemented using an sklearn **Pipeline**, which includes both preprocessing and model training steps.
+
+---
+
+### Features Used
+
+The following features were included:
+
+- `CAUSE.CATEGORY` (categorical, nominal)  
+- `U.S._STATE` (categorical, nominal)  
+- `MONTH` (numerical, discrete/ordinal)  
+
+These features were selected because they are available at the time of prediction and provide basic contextual information about the outage.
+
+---
+
+### Preprocessing
+
+- **Categorical features** (`CAUSE.CATEGORY`, `U.S._STATE`) were transformed using **One-Hot Encoding**  
+  - This converts each category into binary indicator variables  
+  - `handle_unknown='ignore'` ensures the model can handle unseen categories in test data  
+
+- **Numerical feature** (`MONTH`) was passed through without transformation  
+
+All preprocessing steps were combined using a **ColumnTransformer** within the pipeline.
+
+---
+
+### Model Performance
+
+The model was evaluated on the **test set** using the following metrics:
+
+- **RMSE:** 7239.93  
+- **R²:** 0.146  
+
+---
+
+### Evaluation
+
+The baseline model has relatively **high error (RMSE)** and a **low R² value**, indicating that it explains only a small portion of the variability in outage duration.
+
+This suggests that:
+- The relationship between the selected features and outage duration is weak  
+- Important predictive factors are likely missing from the model  
+
+---
+
+### Conclusion
+
+Overall, this baseline model is **not very strong**, but it serves as an important starting point. It provides a benchmark against which more complex models can be compared.
+
+Future improvements could include:
+- Adding more informative features  
+- Engineering new features  
+- Using more flexible models that can capture nonlinear relationships  
