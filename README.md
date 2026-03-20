@@ -179,3 +179,72 @@ I grouped the data to identify patterns:
 | West North Central |                   0 |                       0 |                    2 |           0 |               1 |                4 |                               0 |
 
 This helped identify which regions and causes are associated with more severe outages.
+
+## Missingness Analysis
+
+### Missing Not At Random (MNAR)
+
+One column that may be **Missing Not At Random (MNAR)** is `OUTAGE.DURATION`.
+
+This is because the likelihood of missing outage duration values may depend on the duration itself. For example, outages that are extremely short or not properly recorded may be more likely to have missing duration values. Since the probability of missingness depends on the unobserved value, this fits the definition of MNAR.
+
+To better understand this missingness (and potentially reclassify it as MAR), additional data would be useful. For instance, information about reporting practices, data collection procedures, or whether certain types of outages are systematically excluded could help explain why values are missing.
+
+---
+
+### Missingness Dependency
+
+I analyzed whether the missingness of `OUTAGE.DURATION` depends on other variables using permutation tests.
+
+First, I created an indicator column:
+- `duration_missing`, which is `True` when `OUTAGE.DURATION` is missing
+
+I then performed permutation tests comparing variability in missingness across groups.
+
+---
+
+### Dependent Relationship: CAUSE.CATEGORY
+
+I tested whether missingness depends on `CAUSE.CATEGORY`.
+
+- Observed statistic: (from notebook output)
+- p-value: (from notebook output)
+
+The permutation test produced a small p-value, indicating that the missingness of `OUTAGE.DURATION` **does depend on** `CAUSE.CATEGORY`.
+
+This suggests that outages caused by certain factors are more likely to have missing duration values, indicating a relationship between missingness and an observed variable (consistent with MAR behavior).
+
+<iframe
+  src="assets/missingness_cause.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The plot shows the distribution of permutation statistics, with the observed statistic marked in red. Since the observed value lies in the tail of the distribution, we reject the null hypothesis of independence.
+
+---
+
+### Independent Relationship: YEAR
+
+I also tested whether missingness depends on `YEAR`.
+
+- Observed statistic: 0.0002975531346297562
+- p-value: 0.48
+
+The permutation test resulted in a large p-value, indicating that the missingness of `OUTAGE.DURATION` **does not depend on** `YEAR`.
+
+<iframe
+  src="assets/missingness_year.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+In this case, the observed statistic falls well within the permutation distribution, so we fail to reject the null hypothesis.
+
+---
+
+### Conclusion
+
+Overall, the missingness of `OUTAGE.DURATION` appears to depend on some observed variables (such as `CAUSE.CATEGORY`) but not others (such as `YEAR`). While there is evidence of MAR behavior, the possibility of MNAR cannot be ruled out, since missingness may also depend on the unobserved duration values themselves.
