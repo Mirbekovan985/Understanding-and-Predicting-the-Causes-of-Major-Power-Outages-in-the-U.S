@@ -1,4 +1,4 @@
-# Analyzing Power Outages  
+# Understanding and Predicting the Causes of Major Power Outages in the-U.S
 Project for DSC 80 at UCSD  
 
 By Nuraiym Mirbekova  
